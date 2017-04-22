@@ -1,0 +1,28 @@
+<div ng-include="'template/head.html'"></div>
+<div class="container">
+    <div class="form-group has-feedback">
+        <input type="text" placeholder="搜索菜品名称或原料..." class="form-control"
+               ng-model="searchTxt" ng-keydown="searchDishes($event)">
+        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+    </div>
+    <ul class="list-group" style="list-style:none" ng-repeat="dish in dishes">
+        <li class="list-group-item">
+            <div class="media-left">
+                <a href="#detail/{{dish.did}}">
+                    <img ng-src="img/{{dish.img_sm}}">
+                </a>
+            </div>
+            <div class="media-body">
+                <h4>{{dish.name}}</h4>
+                <p style="border-bottom: 1px solid #ccc">主要食材:{{dish.material}}</p>
+                <p>价格:{{dish.price}}</p>
+            </div>
+        </li>
+    </ul>
+    <div class="alert alert-success text-center" ng-click="getMoreDish()" ng-show="loadStatus < 3">
+        <span ng-show="loadStatus === 1">加载更多</span>
+        <img ng-show="loadStatus === 2" src="img/loading_ajax.gif">
+    </div>
+    <div class="alert alert-danger text-center" ng-show="loadStatus === 3"><span>没有更多了...</span></div>
+</div>
+<div ng-include="'template/foot.html'"></div>
